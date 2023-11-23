@@ -14,6 +14,7 @@ import Loading from './components/Loading.js';
 function App() {
     const [users, setUsers] = useState([]);
     const [user, setUser] = useState(null);
+    const [userForm, setUserForm] = useState({});
     const [showUserForm, setShowUserAdd] = useState(false);
     const [showUserDelete, setShowUserDelete] = useState(false);
     const [showUserDetails, setShowUserDetails] = useState(false);
@@ -32,6 +33,13 @@ function App() {
             })
             .catch(err => console.log(err));
     }, [])
+
+    const onChangeHandler = (e) => {
+        console.log(e.target.name);
+        console.log(e.target.value);
+
+        // setUserForm(state => state[e.target.name] = e.target.value)
+    }
 
     const onUserAddClick = () => {
         setShowUserAdd(true);
@@ -117,7 +125,8 @@ function App() {
             {showUserForm && <UserForm
                 user={user}
                 onFormCloseClick={onCloseClick}
-                onFormSubmit={onFormSubmit} />}
+                onFormSubmit={onFormSubmit}
+                onChangeHandler={onChangeHandler} />}
 
             {showUserDelete && <UserDelete
                 onCloseClick={onCloseClick}
